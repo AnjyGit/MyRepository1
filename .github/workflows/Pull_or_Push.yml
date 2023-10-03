@@ -1,0 +1,25 @@
+name: Pull or Push
+
+on: workflow_dispatch
+
+env: 
+  NAME: Push
+
+jobs:
+  say_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Say push"
+        if: &{{env.NAME == 'Push'}}
+        run: echo "C'est un $NAME !"
+
+jobs:
+  say_pull:
+    runs-on: ubuntu-latest
+    env:
+      TYPE: Pull request
+    steps:  
+      - name: "Say pull request"
+        if: &{{env.NAME != 'Push'}}
+        run: echo "C'est un $TYPE ! "
+      
